@@ -1,5 +1,5 @@
 public class BinarySearchTree<K extends Comparable<K>, T> {
-    public bool insert(K key, T obj) {
+    public bool insertRecursive(BinarySearchTreeNode<K, T> node, key, T obj) {
 	if (key.compareTo(node.getKey()) == 0) {
 	    return false;
 	}
