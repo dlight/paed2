@@ -239,4 +239,54 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	public void print() {
 		System.out.println(this.root);
 	}
+
+	public void preOrdemRecursivo(BinarySearchTreeNode<K, T> n) {
+		if (n.isTerminal())
+			return;
+
+		System.out.print(n.getKey() + " ");
+
+		preOrdemRecursivo(n.getLeft());
+		preOrdemRecursivo(n.getRight());
+	}
+
+	public void preOrdem() {
+		preOrdemRecursivo(this.root);
+
+		if (!this.root.isTerminal())
+			System.out.println("");
+	}
+
+	public void posOrdemRecursivo(BinarySearchTreeNode<K, T> n) {
+		if (n.isTerminal())
+			return;
+
+		posOrdemRecursivo(n.getLeft());
+		posOrdemRecursivo(n.getRight());
+
+		System.out.print(n.getKey() + " ");
+	}
+
+	public void posOrdem() {
+		posOrdemRecursivo(this.root);
+
+		if (!this.root.isTerminal())
+			System.out.println("");
+	}
+
+	public void inOrdemRecursivo(BinarySearchTreeNode<K, T> n) {
+		if (n.isTerminal())
+			return;
+
+		inOrdemRecursivo(n.getLeft());
+		System.out.print(n.getKey() + " ");
+		inOrdemRecursivo(n.getRight());
+	}
+
+	public void inOrdem() {
+		inOrdemRecursivo(this.root);
+
+		if (!this.root.isTerminal())
+			System.out.println("");
+	}
 }

@@ -78,20 +78,26 @@ public class Main {
 
 		if (cmd.equals("add") || cmd.equals("a"))
 			add(input);
-		else if (cmd.equals("reset"))
-			reset();
 		else if (cmd.equals("empty"))
 			check_empty();
 		else if (cmd.equals("exit"))
 			exit();
 		else if (cmd.equals("help"))
 			show_help();
-		else if (cmd.equals("rem") || cmd.equals("r"))
-			rem(input);
 		else if (cmd.equals("search"))
 			search(input);
+		else if (cmd.equals("inordem"))
+			b.inOrdem();
+		else if (cmd.equals("posordem"))
+			b.posOrdem();
+		else if (cmd.equals("preordem"))
+			b.preOrdem();
 		else if (cmd.equals("print"))
 			b.print();
+		else if (cmd.equals("rem") || cmd.equals("r"))
+			rem(input);
+		else if (cmd.equals("reset"))
+			reset();
 		else if (cmd.equals("tests"))
 			show_tests();
 		else
@@ -104,6 +110,9 @@ public class Main {
 			"empty\t\tCheca se a arvore esta vazia.\n" +
 			"exit\t\tSai do interpretador.\n" +
 			"help\t\tEste comando :P\n" +
+			"inordem\tExibe as chaves em in-ordem.\n" +
+			"posordem\tExibe as chaves em pos-ordem.\n" +
+			"preordem\tExibe as chaves em pre-ordem.\n" +
 			"print\t\tExibe uma representacao da arvore.\n" +
 			"rem chave\tRemove uma chave da arvore.\n" +
 			"reset\t\tApaga a arvore.\n" +
@@ -134,7 +143,7 @@ public class Main {
 
 		out.println("Insercoes, rotacao dupla esquerda:\n" +
 					"\ta 1; a 3; a 2\n" +
-					"\ta 5; a 1; a 6; a 9; a 8");
+					"\ta 5; a 1; a 6; a 9; a 8\n");
 
 		out.println("Insercoes, rotacao dupla direita:\n" +
 					"\ta 3; a 1; a 2\n");
@@ -156,7 +165,20 @@ public class Main {
 
 		out.println("Remocao de uma folha, duas rotacoes esquerdas:\n" +
 					"\ta 5; a 2; a 8; a 1; a 3; a 6; a 10; a 4; a 7; a 9; " +
-					"a 11; a 12; r 1");
+					"a 11; a 12; r 1\n");
+
+		out.println("Remocao de um no interno, uma rotacao esquerda:\n" +
+					"\ta 5; a 2; a 8; a 1; a 3; a 6; a 10; a 4; a 7; a 9; " +
+					"a 11; a 12; r 6\n");
+
+		out.println("Remocao de uma folha, com 3 rotacoes direitas:\n" +
+					"\ta 20; a 12; a 28; a 7; a 17; a 25; a 31; a 4; a 10; " +
+					"a 15; a 19; a 23;\n" +
+					"\t\ta 27; a 30; a 32; a 2; a 6; a 9; a 11; a 14; a 16; " +
+					"a 18; a 22;\n" +
+					"\t\ta 24; a 26; a 29; a 1; a 3; a 5; a 8; a 13; a 21; " +
+					"a 0; a 32;\n" +
+					"\t\tr 32");
 	}
 
 	public static void check_empty() {
@@ -173,10 +195,6 @@ public class Main {
 	public static void exit() throws IOException {
 		throw new IOException();
 	}
-
-	//public static void insert(StringTokenizer input) {
-	//	
-	//}
 
 	public static void insert(int mat, String nome) {
 		out.printf("Elemento %d inserido:\n\n", mat);
