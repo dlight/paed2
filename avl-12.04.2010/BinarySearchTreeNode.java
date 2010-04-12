@@ -86,7 +86,8 @@ public class BinarySearchTreeNode<K extends Comparable<K>, T> {
 
 		this.setLeft(null);
 		this.setRight(null);
-		this.adjustHeight();
+
+		height = 0;
 	}
 
 	private static String spaces(int level) {

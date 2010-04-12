@@ -41,6 +41,15 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	private void
 	doOnLeftmost(BinarySearchTreeNode<K, T> f, BinarySearchTreeNode<K, T> i) {
 		if (i.isTerminal() || i.getLeft().isTerminal()) {
+
+			// caso mais simples: sem rotacoes
+			//
+			//     20 (f)            30 (i)            30 (i)
+			//    /  \      swap    /  \              /  \
+			//  10    30 (i)  ->  10    20 (f)   -> 10    40
+			//          \                \
+			//          40                40
+
 			f.swap(i);
 
 			removeCases(i);
@@ -163,7 +172,7 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 
 	// aqui 5 inicialmente eh 'node'. depois do swap, vira 'old_node'
 	// 3 eh o 'pivo', que ira virar 'node' depois do swap
-
+    //
 	// node 5               node 3      ajeitar       3 node
 	//     / \   swap           / \    pointeiros    / \
 	//    3   C   ->  old_node 5   C       ->       A   5 old_node
@@ -188,7 +197,7 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 
 	// aqui 3 inicialmente eh 'node'. depois do swap, vira 'old_node'
 	// 5 eh o 'pivo', que ira virar 'node' depois do swap
-
+    //
 	//    3 node          5 node         ajeitar          node 5
 	//   / \     swap    / \            pointeiros            / \
 	//  A   5     ->    A   3 old_node      ->      old_node 3   C

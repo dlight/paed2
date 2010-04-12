@@ -47,17 +47,7 @@ public class Main {
 		check_empty();
 	}
 
-	public static void read() throws IOException {
-		out.print("> ");
-		out.flush();
-
-		String line = stdin.readLine();
-
-		if (line == null) {
-			out.println("");
-			throw new IOException();
-		}
-
+	public static void command(String line) throws IOException {
 		StringTokenizer input = new StringTokenizer(line);
 
 		if (!input.hasMoreTokens())
@@ -85,6 +75,26 @@ public class Main {
 			out.println(cmd + ": comando invalido.");
 	}
 
+	public static void read() throws IOException {
+		out.print("> ");
+		out.flush();
+
+		String line = stdin.readLine();
+
+		if (line == null) {
+			out.println("");
+			throw new IOException();
+		}
+
+		String[] lines = line.split(";");
+
+		for (int i = 0; i < lines.length; i++) { 
+			if (i > 0)
+				out.println("");
+			command(lines[i]);
+		}
+	}
+
 	public static void show_help() {
 		out.println("Os comandos disponiveis sao:\n\n" +
 			"add chave obj\tAdiciona algo a arvore.\n" +
@@ -95,6 +105,8 @@ public class Main {
 			"rem chave\tRemove uma chave da arvore.\n" +
 			"search chave\tBusca uma chave na arvore.\n" +
 			"print\t\tExibe uma representacao da arvore.\n");
+
+		out.println("Comandos em uma mesma linha sao separados com ;\n");
 
 		out.println("Uma arvore vazia eh exibida como \".\", e uma arvore " +
 			"nao-vazia como:\n");
@@ -131,6 +143,8 @@ public class Main {
 	//}
 
 	public static void insert(int mat, String nome) {
+		out.printf("Elemento %d inserido:\n\n", mat);
+
 		Integer m = new Integer(mat);
 		b.insert(mat, new Aluno(mat, nome));
 	}
@@ -196,7 +210,7 @@ public class Main {
 		}
 
 		if (b.remove(key)) {
-			out.println("Elemento removido.\n");
+			out.printf("Elemento %d removido:\n\n", key);
 			b.print();
 		}
 		else {
