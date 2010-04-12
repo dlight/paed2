@@ -18,7 +18,9 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 
 		return insertRecursive(this.root, key, obj);
 	}
-	//public boolean remove(K key){ ... }
+	public boolean remove(K key){
+		return removeRecursive(this.root, key);
+	}
 
 	public T search(K key) {
 		return searchRecursive(this.root, key);
@@ -36,6 +38,43 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 			return searchRecursive(node.getRight(), key);
 		else
 			return searchRecursive(node.getLeft(), key);
+	}
+
+	private BinarySearchTreeNode<K, T>
+	findLeftmost(BinarySearchTreeNode<K, T> n) {
+		if (n.isTerminal() || n.left.isTerminal())
+		    return n;
+		else
+		    return n.left.findLeftmost();
+	}
+
+	private boolean removeRecursive(BinarySearchTreeNode<K, T> f, K key) {
+		if (f.isTerminal()) {
+	    	return false;
+		}
+
+		if (f.left.isTerminal() && f.right.isTerminal()) {
+		    f.key = null;
+		    f.aluno = null;
+		    f.left = null;
+		    f.right = null;
+		}
+		else if (f.getLeft.isTerminal() && !f.getRight.isTerminal()) {
+			f.swap(f.getLeft());
+			f.setLeft = new BinarySearchTreeNode<K, T>();
+		}
+		else if (!f.getLeft.isTerminal() && f.getRight.isTerminal()) {
+			f.swap(f.getRight());
+			f.setRight = new BinarySearchTreeNode<K, T>();
+		}
+		else {
+			BinarySearchTreeNode<K, T> q = f.right.findLeftmost();
+			f.key = q.getKey();
+			f.aluno = q.getAluno();
+
+			q.left = null;
+			q.right = null;
+		}
 	}
 
 	private boolean insertRecursive(BinarySearchTreeNode<K, T> node,
