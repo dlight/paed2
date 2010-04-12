@@ -142,8 +142,7 @@ public class Main {
 				"\ta 3; a 2; a 1; a 4; a 5; a 6\n");
 
 		out.println("Insercoes, rotacao dupla esquerda:\n" +
-					"\ta 1; a 3; a 2\n" +
-					"\ta 5; a 1; a 6; a 9; a 8\n");
+					"\ta 1; a 3; a 2\n");
 
 		out.println("Insercoes, rotacao dupla direita:\n" +
 					"\ta 3; a 1; a 2\n");
