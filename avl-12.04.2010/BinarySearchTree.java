@@ -8,6 +8,11 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	public boolean isEmpty() {
 		return this.root.isTerminal();
 	}
+
+	public int getHeight() {
+		return this.root.getHeight();
+	}
+
 	public boolean insert(K key, T obj) {
 		return insertRecursive(this.root, key, obj);
 	}
@@ -23,6 +28,8 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 
 			node.setLeft(new BinarySearchTreeNode<K, T>());
 			node.setRight(new BinarySearchTreeNode<K, T>());
+
+			node.adjustHeight();
 
 			return true;
 		}

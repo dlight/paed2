@@ -10,6 +10,14 @@ public class BinarySearchTreeNode<K extends Comparable<K>, T> {
 		height = 0;
 	}
 
+	public BinarySearchTreeNode(BinarySearchTreeNode<K, T> q) {
+		key = q.getKey();
+		object = q.getObject();
+		right = q.getRight();
+		left = q.getLeft();
+		height = q.getHeight();
+	}
+
 	public int getBalanceFactor() {
 		return this.getLeft().getHeight() -
 			this.getRight().getHeight();
@@ -63,20 +71,22 @@ public class BinarySearchTreeNode<K extends Comparable<K>, T> {
 	}
 
 	public void swap(BinarySearchTreeNode<K, T> q) {
-		K tmp_key = q.getKey();
+		BinarySearchTreeNode<K, T> tmp = new BinarySearchTreeNode<K, T>(q);
+
+		/*K tmp_key = q.getKey();
 		T tmp_obj = q.getObject();
 		BinarySearchTreeNode<K, T> tmp_left = q.getLeft();
-		BinarySearchTreeNode<K, T> tmp_right = q.getRight();
+		BinarySearchTreeNode<K, T> tmp_right = q.getRight();*/
 
 		q.setKey(this.key);
 		q.setObject(this.object);
-		q.setLeft(this.left);
-		q.setRight(this.right);
+		//q.setLeft(this.left);
+		//q.setRight(this.right);
 
-		this.setKey(tmp_key);
-		this.setObject(tmp_obj);
-		this.setLeft(tmp_left);
-		this.setRight(tmp_right);
+		this.setKey(tmp.getKey());
+		this.setObject(tmp.getObject());
+		//this.setLeft(tmp.getLeft());
+		//this.setRight(tmp.getRight());
 
 	}
 
