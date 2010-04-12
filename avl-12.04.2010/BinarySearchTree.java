@@ -1,3 +1,11 @@
+// Tarefa 1 de PAED II 2010.1 - Turma 5 - UFRN
+// Elias Gabriel Amaral da Silva (matricula: 200619853)
+
+// Parte de um programa que implementa e testa uma
+// Arvore AVL
+
+// BinarySearchTree: Arvore AVL
+
 public class BinarySearchTree<K extends Comparable<K>, T> {
 	private BinarySearchTreeNode<K, T> root;
 

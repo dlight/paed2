@@ -2,7 +2,7 @@
 // Elias Gabriel Amaral da Silva (matricula: 200619853)
 
 // Parte de um programa que implementa e testa uma
-// Arvore Binaria de Busca
+// Arvore AVL
 
 // Aluno: dados armazenados na arvore
 
