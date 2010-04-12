@@ -14,11 +14,9 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	}
 
 	public boolean insert(K key, T obj) {
-		//System.out.println("\nInserindo " + obj);
-
 		return insertRecursive(this.root, key, obj);
 	}
-	public boolean remove(K key){
+	public boolean remove(K key) {
 		return removeRecursive(this.root, key);
 	}
 
@@ -42,10 +40,10 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 
 	private BinarySearchTreeNode<K, T>
 	findLeftmost(BinarySearchTreeNode<K, T> n) {
-		if (n.isTerminal() || n.left.isTerminal())
+		if (n.isTerminal() || n.getLeft().isTerminal())
 		    return n;
 		else
-		    return n.left.findLeftmost();
+		    return findLeftmost(n.getLeft());
 	}
 
 	private boolean removeRecursive(BinarySearchTreeNode<K, T> f, K key) {
@@ -53,27 +51,36 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	    	return false;
 		}
 
-		if (f.left.isTerminal() && f.right.isTerminal()) {
-		    f.key = null;
-		    f.aluno = null;
-		    f.left = null;
-		    f.right = null;
+		int c = f.getKey().compareTo(key);
+
+		if (c < 0)
+			return removeRecursive(f.getRight(), key);
+		else if (c > 0)
+			return removeRecursive(f.getLeft(), key);
+		else if (f.getLeft().isTerminal() && f.getRight().isTerminal()) {
+		    f.delete();
+
+			return true;
 		}
-		else if (f.getLeft.isTerminal() && !f.getRight.isTerminal()) {
-			f.swap(f.getLeft());
-			f.setLeft = new BinarySearchTreeNode<K, T>();
-		}
-		else if (!f.getLeft.isTerminal() && f.getRight.isTerminal()) {
+		else if (f.getLeft().isTerminal() && !f.getRight().isTerminal()) {
 			f.swap(f.getRight());
-			f.setRight = new BinarySearchTreeNode<K, T>();
+			f.setRight(new BinarySearchTreeNode<K, T>());
+
+			return true;
+		}
+		else if (!f.getLeft().isTerminal() && f.getRight().isTerminal()) {
+			f.swap(f.getLeft());
+			f.setLeft(new BinarySearchTreeNode<K, T>());
+
+			return true;
 		}
 		else {
-			BinarySearchTreeNode<K, T> q = f.right.findLeftmost();
-			f.key = q.getKey();
-			f.aluno = q.getAluno();
+			BinarySearchTreeNode<K, T> q = findLeftmost(f.getRight());
+			f.swap(q);
 
-			q.left = null;
-			q.right = null;
+			q.delete();
+
+			return true;
 		}
 	}
 
@@ -105,7 +112,6 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 
 			if (inseriu) {
 				node.adjustHeight();
-		//System.out.printf("\t%d, %d, [%d, %d], %s\n", node.getHeight(), node.getBalanceFactor(), node.getLeft().getHeight(), node.getRight().getHeight(), node.getObject());
 			}
 			if (Math.abs(node.getBalanceFactor()) > 1) {
 				this.balance(node);

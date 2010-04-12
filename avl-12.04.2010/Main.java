@@ -75,6 +75,8 @@ public class Main {
 			exit();
 		else if (cmd.equals("help"))
 			show_help();
+		else if (cmd.equals("rem") || cmd.equals("r"))
+			rem(input);
 		else if (cmd.equals("search"))
 			search(input);
 		else if (cmd.equals("print"))
@@ -84,14 +86,29 @@ public class Main {
 	}
 
 	public static void show_help() {
-		out.print("Os comandos disponiveis sao:\n\n" +
+		out.println("Os comandos disponiveis sao:\n\n" +
 			"add chave obj\t\tAdiciona algo a arvore.\n" +
 			"clear\t\t\tApaga a arvore.\n" +
 			"empty\t\t\tCheca se a arvore esta vazia.\n" +
 			"exit\t\t\tSai do interpretador.\n" +
 			"help\t\t\tEste comando :P\n" +
-			"search\t\t\tBusca uma chave na arvore.\n" +
-			"print\t\t\tImprime a arvore.\n");
+			"rem chave\t\tRemove uma chave da arvore.\n" +
+			"search chave\t\tBusca uma chave na arvore.\n" +
+			"print\t\t\tExibe uma representacao da arvore.\n");
+
+		out.println("Uma arvore vazia eh exibida como \".\", e uma arvore " +
+			"nao-vazia como:\n");
+
+		out.println("\t(raiz sub-arvore-esquerda sub-arvore-direita)\n");
+
+		out.println("(raiz . .) eh exibido como raiz. Cada no' eh exibido " +
+			"como:\n");
+
+		out.println("\tchave: dados [altura balanco]\n");
+
+		out.println("Onde a chave e' um numero " +
+			"inteiro nao-negativo (uma matricula), e os dados");
+		out.println("armazenados sao referentes a um aluno.");
 	}
 
 	public static void check_empty() {
@@ -163,6 +180,27 @@ public class Main {
 		Aluno a = b.search(key);
 
 		out.println(a == null ? "Nao encontrado." : a);
+	}
+
+	public static void rem(StringTokenizer input) {
+		if (! input.hasMoreTokens()) {
+			entrada_invalida();
+			return;
+		}
+
+		int key = read_int(input.nextToken());
+		if (key < 0) {
+			entrada_invalida();
+			return;
+		}
+
+		if (b.remove(key)) {
+			out.println("Elemento removido.\n");
+			b.print();
+		}
+		else {
+			out.println("Nao encontrado.");
+		}
 	}
 		
 }

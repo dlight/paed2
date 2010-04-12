@@ -81,6 +81,13 @@ public class BinarySearchTreeNode<K extends Comparable<K>, T> {
 
 	}
 
+	public void delete() {
+		this.swap(new BinarySearchTreeNode<K, T>());
+
+		this.setLeft(null);
+		this.setRight(null);
+	}
+
 	private static String spaces(int level) {
 		String c = "";
 		for (int i = 0; i < level; i++)
