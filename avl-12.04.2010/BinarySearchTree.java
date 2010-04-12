@@ -46,6 +46,32 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 		    return findLeftmost(n.getLeft());
 	}
 
+	private void removeCases(BinarySearchTreeNode<K, T> f) {
+		if (f.getLeft().isTerminal() && f.getRight().isTerminal()) {
+		    f.delete();
+		}
+		else if (f.getLeft().isTerminal() && !f.getRight().isTerminal()) {
+			BinarySearchTreeNode<K, T> q = f.getRight();
+			f.swap(q);
+			f.setRight(q.getRight());
+			f.setLeft(q.getLeft());
+		}
+		else if (!f.getLeft().isTerminal() && f.getRight().isTerminal()) {
+			BinarySearchTreeNode<K, T> q = f.getLeft();
+			f.swap(q);
+			f.setRight(q.getRight());
+			f.setLeft(q.getLeft());
+
+		}
+		else {
+			BinarySearchTreeNode<K, T> q = findLeftmost(f.getRight());
+			f.swap(q);
+
+			return removeCases(q);
+
+		}
+	}
+
 	private boolean removeRecursive(BinarySearchTreeNode<K, T> f, K key) {
 		if (f.isTerminal()) {
 	    	return false;
@@ -53,33 +79,14 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 
 		int c = f.getKey().compareTo(key);
 
-		if (c < 0)
+		if (c < 0) {
 			return removeRecursive(f.getRight(), key);
-		else if (c > 0)
+		}
+		else if (c > 0) {
 			return removeRecursive(f.getLeft(), key);
-		else if (f.getLeft().isTerminal() && f.getRight().isTerminal()) {
-		    f.delete();
-
-			return true;
-		}
-		else if (f.getLeft().isTerminal() && !f.getRight().isTerminal()) {
-			f.swap(f.getRight());
-			f.setRight(new BinarySearchTreeNode<K, T>());
-
-			return true;
-		}
-		else if (!f.getLeft().isTerminal() && f.getRight().isTerminal()) {
-			f.swap(f.getLeft());
-			f.setLeft(new BinarySearchTreeNode<K, T>());
-
-			return true;
 		}
 		else {
-			BinarySearchTreeNode<K, T> q = findLeftmost(f.getRight());
-			f.swap(q);
-
-			q.delete();
-
+			removeCases(f);
 			return true;
 		}
 	}
