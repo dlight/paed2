@@ -38,12 +38,18 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 			return searchRecursive(node.getLeft(), key);
 	}
 
-	private BinarySearchTreeNode<K, T>
-	findLeftmost(BinarySearchTreeNode<K, T> n) {
-		if (n.isTerminal() || n.getLeft().isTerminal())
-		    return n;
-		else
-		    return findLeftmost(n.getLeft());
+	private void BinarySearchTreeNode<K, T>
+	doOnLeftmost(BinarySearchTreeNode<K, T> f, BinarySearchTreeNode<K, T> i) {
+		if (i.isTerminal() || i.getLeft().isTerminal()) {
+			f.swap(i);
+
+			removeCases(i);
+		}
+		else {
+		    doOnLeftmost(f, i.getLeft());
+			i.adjustHeight();
+			this.balance(i);
+		}
 	}
 
 	private void removeCases(BinarySearchTreeNode<K, T> f) {
@@ -55,6 +61,9 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 			f.swap(q);
 			f.setRight(q.getRight());
 			f.setLeft(q.getLeft());
+
+			f.adjustHeight();
+			this.balance(i);
 		}
 		else if (!f.getLeft().isTerminal() && f.getRight().isTerminal()) {
 			BinarySearchTreeNode<K, T> q = f.getLeft();
@@ -62,13 +71,13 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 			f.setRight(q.getRight());
 			f.setLeft(q.getLeft());
 
+			f.adjustHeight();
+			this.balance(i);
 		}
 		else {
-			BinarySearchTreeNode<K, T> q = findLeftmost(f.getRight());
-			f.swap(q);
-
-			removeCases(q);
-
+			doOnLeftmost(f, f.getRight());
+			f.adjustHeight();
+			this.balance(i);
 		}
 	}
 
@@ -120,14 +129,16 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 			if (inseriu) {
 				node.adjustHeight();
 			}
-			if (Math.abs(node.getBalanceFactor()) > 1) {
-				this.balance(node);
-			}
+			this.balance(node);
 			return inseriu;
 		}
 	}
 	
 	public void balance(BinarySearchTreeNode<K, T> node) {
+		if (Math.abs(node.getBalanceFactor()) <= 1) {
+			return;
+		}
+
 		if (node.getLeft().getHeight() > node.getRight().getHeight()) {
 			if (node.getLeft().getLeft().getHeight() >
 				node.getLeft().getRight().getHeight()) {	
