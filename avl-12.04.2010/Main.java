@@ -110,7 +110,7 @@ public class Main {
 			"empty\t\tCheca se a arvore esta vazia.\n" +
 			"exit\t\tSai do interpretador.\n" +
 			"help\t\tEste comando :P\n" +
-			"inordem\tExibe as chaves em in-ordem.\n" +
+			"inordem\t\tExibe as chaves em in-ordem.\n" +
 			"posordem\tExibe as chaves em pos-ordem.\n" +
 			"preordem\tExibe as chaves em pre-ordem.\n" +
 			"print\t\tExibe uma representacao da arvore.\n" +
