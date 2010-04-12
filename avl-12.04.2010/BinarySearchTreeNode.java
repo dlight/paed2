@@ -94,11 +94,15 @@ public class BinarySearchTreeNode<K extends Comparable<K>, T> {
 		if (this.isTerminal())
 			return ".";
 		else if (this.left.isTerminal() && this.right.isTerminal())
-			return String.format("%s",
-				this.object.toString());
-   		else
-			return String.format("(%s\n%s%s\n%s%s)",
+			return String.format("%s [%d %d]",
 				this.object.toString(),
+				this.height,
+				this.getBalanceFactor());
+   		else
+			return String.format("(%s [%d %d]\n%s%s\n%s%s)",
+				this.object.toString(),
+				this.height,
+				this.getBalanceFactor(),
 				s,
 				this.left.toString_level(level+1),
 				s,

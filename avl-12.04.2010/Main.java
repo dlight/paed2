@@ -37,10 +37,22 @@ public class Main {
 			"Dados II");
 		out.println("Implementacao de Arvore AVL - periodo 2010.1\n");
 
-		out.println("Este programa foi feito por Elias Gabriel Amaral da " +
-			"Silva.\n");
+		out.println("Este programa foi feito por " +
+			"Elias Gabriel Amaral da Silva.\n");
 
 		out.println("Digite help.\n");
+
+
+		/*insert(3, "Risos");
+		insert(2, "Faggot");
+		insert(1, "Phenom");
+		insert(4, "Nice");
+		insert(5, "Mermaid");
+		insert(6, "Rufus");
+		insert(7, "Labour");
+		insert(16, "Corea");
+		insert(15, "Mermaid");
+		insert(14, "Mermaid");*/
 
 		check_empty();
 	}

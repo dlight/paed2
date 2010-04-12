@@ -37,7 +37,7 @@ public class Aluno {
 	}
 
 	public String toString() {
-		return String.format("%s:%s", this.getmatricula(), this.getNome());
+		return String.format("%s: %s", this.getmatricula(), this.getNome());
 	}
 
 	public void print() {
