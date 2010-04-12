@@ -47,34 +47,6 @@ public class Main {
 		check_empty();
 	}
 
-	public static void command(String line) throws IOException {
-		StringTokenizer input = new StringTokenizer(line);
-
-		if (!input.hasMoreTokens())
-			return;
-
-		String cmd = input.nextToken();
-
-		if (cmd.equals("add") || cmd.equals("a"))
-			add(input);
-		else if (cmd.equals("clear"))
-			clear();
-		else if (cmd.equals("empty"))
-			check_empty();
-		else if (cmd.equals("exit"))
-			exit();
-		else if (cmd.equals("help"))
-			show_help();
-		else if (cmd.equals("rem") || cmd.equals("r"))
-			rem(input);
-		else if (cmd.equals("search"))
-			search(input);
-		else if (cmd.equals("print"))
-			b.print();
-		else
-			out.println(cmd + ": comando invalido.");
-	}
-
 	public static void read() throws IOException {
 		out.print("> ");
 		out.flush();
@@ -95,18 +67,51 @@ public class Main {
 		}
 	}
 
+
+	public static void command(String line) throws IOException {
+		StringTokenizer input = new StringTokenizer(line);
+
+		if (!input.hasMoreTokens())
+			return;
+
+		String cmd = input.nextToken();
+
+		if (cmd.equals("add") || cmd.equals("a"))
+			add(input);
+		else if (cmd.equals("reset"))
+			reset();
+		else if (cmd.equals("empty"))
+			check_empty();
+		else if (cmd.equals("exit"))
+			exit();
+		else if (cmd.equals("help"))
+			show_help();
+		else if (cmd.equals("rem") || cmd.equals("r"))
+			rem(input);
+		else if (cmd.equals("search"))
+			search(input);
+		else if (cmd.equals("print"))
+			b.print();
+		else if (cmd.equals("tests"))
+			show_tests();
+		else
+			out.println(cmd + ": comando invalido.");
+	}
+
 	public static void show_help() {
 		out.println("Os comandos disponiveis sao:\n\n" +
 			"add chave obj\tAdiciona algo a arvore.\n" +
-			"clear\t\tApaga a arvore.\n" +
 			"empty\t\tCheca se a arvore esta vazia.\n" +
 			"exit\t\tSai do interpretador.\n" +
 			"help\t\tEste comando :P\n" +
+			"print\t\tExibe uma representacao da arvore.\n" +
 			"rem chave\tRemove uma chave da arvore.\n" +
+			"reset\t\tApaga a arvore.\n" +
 			"search chave\tBusca uma chave na arvore.\n" +
-			"print\t\tExibe uma representacao da arvore.\n");
+			"tests\t\tExibe comandos de teste.\n");
 
-		out.println("Comandos em uma mesma linha sao separados com ;\n");
+		out.println("Comandos em uma mesma linha sao separados com ;");
+		out.println("add e rem podem ser abreviados como a e r.\n\n");
 
 		out.println("Uma arvore vazia eh exibida como \".\", e uma arvore " +
 			"nao-vazia como:\n");
@@ -123,13 +128,44 @@ public class Main {
 		out.println("armazenados sao referentes a um aluno.");
 	}
 
+	public static void show_tests() {
+		out.println("Insercoes, 1 rotacao direita, 2 esquerdas:\n" +
+				"\ta 3; a 2; a 1; a 4; a 5; a 6\n");
+
+		out.println("Insercoes, rotacao dupla esquerda:\n" +
+					"\ta 1; a 3; a 2\n" +
+					"\ta 5; a 1; a 6; a 9; a 8");
+
+		out.println("Insercoes, rotacao dupla direita:\n" +
+					"\ta 3; a 1; a 2\n");
+
+		out.println("Insercoes com rotacoes, remocao sem rotacao:\n" +
+					"\ta 30; a 20; a 10; a 25; a 40; a 35; r 30\n");
+
+		out.println("Remocao da raiz com 2 filhos, rotacao esquerda:\n" +
+					"\ta 5; a 3; a 8; a 2; a 7; a 9; a 10; r 5\n");
+
+		out.println("Remocao de uma folha, rotacao esquerda:\n" +
+					"\ta 3; a 1; a 4; a 5; r 1\n" +
+					"\ta 32; a 16; a 48; a 8; a 24; a 40; a 56; a 4; a 36; " +
+					"a 44; a 52; a 60;\n" +
+					"\t\ta 58; a 62; r 4\n");
+
+		out.println("Remocao de uma folha, rotacao direita:\n" +
+					"\ta 4; a 3; a 5; a 1; r 5\n");
+
+		out.println("Remocao de uma folha, duas rotacoes esquerdas:\n" +
+					"\ta 5; a 2; a 8; a 1; a 3; a 6; a 10; a 4; a 7; a 9; " +
+					"a 11; a 12; r 1");
+	}
+
 	public static void check_empty() {
 		out.println(b.isEmpty() ?
 			"A arvore esta vazia." :
 			"A arvore nao esta vazia.");
 	}
 
-	public static void clear() {
+	public static void reset() {
 		b = new BinarySearchTree<Integer, Aluno>();
 		check_empty();
 	}

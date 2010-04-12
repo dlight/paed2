@@ -98,10 +98,16 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 		int c = f.getKey().compareTo(key);
 
 		if (c < 0) {
-			return removeRecursive(f.getRight(), key);
+			boolean q = removeRecursive(f.getRight(), key);
+			f.adjustHeight();
+			this.balance(f);
+			return q;
 		}
 		else if (c > 0) {
-			return removeRecursive(f.getLeft(), key);
+			boolean q = removeRecursive(f.getLeft(), key);
+			f.adjustHeight();
+			this.balance(f);
+			return q;
 		}
 		else {
 			removeCases(f);
