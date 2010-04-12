@@ -49,20 +49,22 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	public void balance(AVLSearchTreeNode<K, T> node) {
 	if (node.getLeft().getHeight() > node.getRight().getHeight()) {
 		if (node.getLeft().getLeft().getHeight() >
-		node.getLeft().getRight().getHeight()) {
-		this.rotateRight(node);
+			node.getLeft().getRight().getHeight()) {
+
+			this.rotateRight(node);
 		}
 		else {
-		this.rotateDoubleRight(node);
+			this.rotateDoubleRight(node);
 		}
 	}
 	else {
 		if (node.getRight().getRight().getHeight() >
-		node.getRight().getLeft().getHeight()) {
-		this.rotateLeft(node);
+			node.getRight().getLeft().getHeight()) {
+
+			this.rotateLeft(node);
 		}
 		else {
-		this.rotateDoubleLeft(node);
+			this.rotateDoubleLeft(node);
 		}
 	}
 	}
