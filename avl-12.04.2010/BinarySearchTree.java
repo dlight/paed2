@@ -38,7 +38,7 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 			return searchRecursive(node.getLeft(), key);
 	}
 
-	private void BinarySearchTreeNode<K, T>
+	private void
 	doOnLeftmost(BinarySearchTreeNode<K, T> f, BinarySearchTreeNode<K, T> i) {
 		if (i.isTerminal() || i.getLeft().isTerminal()) {
 			f.swap(i);
@@ -63,7 +63,7 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 			f.setLeft(q.getLeft());
 
 			f.adjustHeight();
-			this.balance(i);
+			this.balance(f);
 		}
 		else if (!f.getLeft().isTerminal() && f.getRight().isTerminal()) {
 			BinarySearchTreeNode<K, T> q = f.getLeft();
@@ -72,12 +72,12 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 			f.setLeft(q.getLeft());
 
 			f.adjustHeight();
-			this.balance(i);
+			this.balance(f);
 		}
 		else {
 			doOnLeftmost(f, f.getRight());
 			f.adjustHeight();
-			this.balance(i);
+			this.balance(f);
 		}
 	}
 
