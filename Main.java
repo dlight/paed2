@@ -21,7 +21,8 @@ public class Main {
 	public static void main(String args[]) {
 		b = new BinarySearchTree<Integer, Aluno>();
 
-		add(200619853, "Elias");
+		add(1, "Elias");
+		add(2, "Paulo");
 
 		print();
 	}
