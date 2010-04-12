@@ -16,11 +16,6 @@ public class Main {
 	static String input_str;
 	static StringTokenizer input;
 
-	public static void add(int mat, String nome) {
-		Integer m = new Integer(mat);
-		b.insert(mat, new Aluno(mat, nome));
-	}
-
 	public static void print() {
 		b.print();
 	}
@@ -46,52 +41,94 @@ public class Main {
 
 	public static void show_help() {
 		out.print("Os comandos disponiveis sao:\n\n" +
-			"+ chave obj\tO mesmo que insert\n" +
+			"add chave obj\t\tAdiciona algo a arvore.\n" +
 			"empty\t\t\tCheca se a arvore esta vazia.\n" +
-			"insert chave obj\tAdiciona algo a arvore\n" +
+			"exit\t\t\tSai do interpretador.\n" +
 			"help\t\t\tEste comando :P\n" +
-			"print\t\t\tImprime a arvore\n");
+			"print\t\t\tImprime a arvore.\n");
+	}
+
+	public static void exit() throws IOException {
+		throw new IOException();
 	}
 
 	//public static void insert(StringTokenizer input) {
 	//	
 	//}
 
+	public static void insert(int mat, String nome) {
+		Integer m = new Integer(mat);
+		b.insert(mat, new Aluno(mat, nome));
+	}
+
+	public static int read_int(String s) {
+        try {
+			return Integer.parseInt(s);
+        }
+		catch (NumberFormatException e) {
+			return -1;
+		}
+	}
+
+	public static void add(StringTokenizer input) {
+		if (input.countTokens() < 2) {
+			out.println("Entrada invalida.");
+			return;
+		}
+
+		int key = read_int(input.nextToken());
+		String obj = input.nextToken();
+
+		if (key < 0) {
+			out.println("Entrada invalida.");
+			return;
+		}
+
+		insert(key, obj);
+		print();
+	}
+
 	public static void read() throws IOException {
 		out.print("> ");
 		out.flush();
 
-		StringTokenizer input = new StringTokenizer(stdin.readLine());
+		String line = stdin.readLine();
 
-		if (! input.hasMoreTokens())
+		if (line == null) {
+			out.println("");
+			throw new IOException();
+		}
+
+		StringTokenizer input = new StringTokenizer(line);
+
+		if (!input.hasMoreTokens())
 			return;
 
 		String cmd = input.nextToken();
 
 		if (cmd.equals("help"))
 			show_help();
+		else if (cmd.equals("exit"))
+			exit();
 		else if (cmd.equals("empty"))
 			check_empty();
 		else if (cmd.equals("print"))
 			print();
-		//else if (cmd.equals("insert") || cmd.equals("+"))
-		//	insert(input);
+		else if (cmd.equals("add") || cmd.equals("a"))
+			add(input);
 		else
 			out.println(cmd + ": comando invalido.");
 	}
 
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[]) {
 		init();
 
-		while (true)
-			read();
-
-		/*add(3, "Elias");
-		add(2, "Paulo");
-		add(1, "Rs");
-
-		print();
-
-		print_height();*/
+		try {
+			while (true)
+				read();
+		}
+		catch (IOException e) {
+			return;
+		}
 	}
 }
