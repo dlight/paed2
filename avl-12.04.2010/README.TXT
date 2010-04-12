@@ -73,3 +73,10 @@ O equivalente em XML disso poderia ser, por exemplo:
     </no>
   </filho>
 </no>
+
+Pode-se construir essa arvore, dentro do programa, digitando:
+
+a 1; a 0; a 3; a 2; a 4
+
+(Os ; separam comandos; a eh uma abreviacao de add. O comando tests possui
+outros exemplos)
