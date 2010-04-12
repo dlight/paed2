@@ -14,7 +14,9 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	//public boolean remove(K key){ ... }
 	//public T search(K key){ ... }
 
-	public boolean insertRecursive(BinarySearchTreeNode<K, T> node, K key, T obj) {
+	public boolean insertRecursive(BinarySearchTreeNode<K, T> node,
+		K key, T obj) {
+
 		if (node.isTerminal()) {
 			node.setKey(key);
 			node.setObject(obj);
@@ -72,7 +74,10 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	private void rotateRight(BinarySearchTreeNode<K, T> node) {
 		BinarySearchTreeNode<K, T> pivot = node.getLeft();
 
-	
+		BinarySearchTreeNode<K, T> tmp = pivot.getRight();
+
+		pivot.setLeft(node);
+		node.setRight(tmp);
 
 	}
 
