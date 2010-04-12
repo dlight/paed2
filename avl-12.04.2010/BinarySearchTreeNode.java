@@ -62,6 +62,24 @@ public class BinarySearchTreeNode<K extends Comparable<K>, T> {
 		this.right = right;
 	}
 
+	public void swap(BinarySearchTreeNode<K, T> q) {
+		K tmp_key = q.getKey();
+		T tmp_obj = q.getObject();
+		BinarySearchTreeNode<K, T> tmp_left = q.getLeft();
+		BinarySearchTreeNode<K, T> tmp_right = q.getRight();
+
+		q.setKey(this.key);
+		q.setObject(this.object);
+		q.setLeft(this.left);
+		q.setRight(this.right);
+
+		this.setKey(tmp_key);
+		this.setObject(tmp_obj);
+		this.setLeft(tmp_left);
+		this.setRight(tmp_right);
+
+	}
+
 	private static String spaces(int level) {
 		String c = "";
 		for (int i = 0; i < level; i++)

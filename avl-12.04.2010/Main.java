@@ -21,9 +21,9 @@ public class Main {
 	public static void main(String args[]) {
 		b = new BinarySearchTree<Integer, Aluno>();
 
-		add(1, "Elias");
+		add(3, "Elias");
 		add(2, "Paulo");
-		add(3, "Rs");
+		//add(1, "Rs");
 
 		print();
 	}
