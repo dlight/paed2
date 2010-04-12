@@ -47,10 +47,9 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 
 			if (inseriu) {
 				node.adjustHeight();
-		System.out.printf("%d, %d, [%d, %d], %s, %s\n", node.getHeight(), node.getBalanceFactor(), node.getLeft().getHeight(), node.getRight().getHeight(), node.getObject(), obj);
+	//	System.out.printf("%d, %d, [%d, %d], %s, %s\n", node.getHeight(), node.getBalanceFactor(), node.getLeft().getHeight(), node.getRight().getHeight(), node.getObject(), obj);
 			}
 			if (Math.abs(node.getBalanceFactor()) > 1) {
-		System.out.println(node.getBalanceFactor());
 				this.balance(node);
 			}
 			return inseriu;
@@ -58,7 +57,7 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	}
 	
 	public void balance(BinarySearchTreeNode<K, T> node) {
-		System.out.println("q..");
+		System.out.println("debug: balanco");
 
 		if (node.getLeft().getHeight() > node.getRight().getHeight()) {
 			if (node.getLeft().getLeft().getHeight() >
@@ -67,20 +66,31 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 				this.rotateRight(node);
 			}
 			else {
-				return;//this.rotateDoubleRight(node);
+				this.rotateDoubleRight(node);
 			}
 		}
 		else {
 			if (node.getRight().getRight().getHeight() >
 				node.getRight().getLeft().getHeight()) {	
 
-				this.rotateLeft(node);
+					this.rotateLeft(node);
 			}
 			else {
-				return;//this.rotateDoubleLeft(node);
+				this.rotateDoubleLeft(node);
 			}
 		}
 	}
+
+	private void rotateDoubleLeft(BinarySearchTreeNode<K, T> node) {
+		rotateLeft(node);
+		rotateRight(node);
+	}
+
+	private void rotateDoubleRight(BinarySearchTreeNode<K, T> node) {
+		rotateRight(node);
+		rotateLeft(node);
+	}
+
 
 	// aqui 5 inicialmente eh 'node'. depois do swap, vira 'old_node'
 	// 3 eh o 'pivo', que ira virar 'node' depois do swap
@@ -92,7 +102,7 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	//  A   B                A   B                    B   C
 
 	private void rotateRight(BinarySearchTreeNode<K, T> node) {
-		System.out.println("Ha..");
+		System.out.println("Efetuando rotacao direita..\n");
 
 		node.swap(node.getLeft());
 		BinarySearchTreeNode<K, T> old_node = node.getLeft();
@@ -114,12 +124,12 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	//    B   C           B   C                            A   B
 
 	private void rotateLeft(BinarySearchTreeNode<K, T> node) {
-		System.out.println("Ha..");
+		System.out.println("Efetuando rotacao esquerda..\n");
 
 		node.swap(node.getRight());
 		BinarySearchTreeNode<K, T> old_node = node.getRight();
 
-		node.setRight(old_node.getLeft());		// C
+		node.setRight(old_node.getRight());		// C
 		old_node.setRight(old_node.getLeft());	// B
 		old_node.setLeft(node.getLeft());		// A
 

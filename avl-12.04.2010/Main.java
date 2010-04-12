@@ -31,10 +31,16 @@ public class Main {
 
 		stdin = new BufferedReader (new InputStreamReader(System.in));
 
-		out.print("Bem vindo a implementacao de Elias da Arvore AVL.\n\n");
+		out.println("Universidade Federal do Rio Grande do Norte");
+		out.println("Departamento de Informatica e Matematica Aplicada");
+		out.println("DIM0111.1 - Pratica de Algoritmos e Estruturas de " +
+			"Dados II");
+		out.println("Implementacao de Arvore AVL - periodo 2010.1\n");
 
-		out.print("Este interpretador possui diversos comandos.\n");
-		out.print("Digite help para ve-los.\n\n");
+		out.println("Este programa foi feito por Elias Gabriel Amaral da " +
+			"Silva.\n");
+
+		out.println("Digite help.\n");
 
 		check_empty();
 	}
@@ -71,13 +77,13 @@ public class Main {
 	}
 
 	public static void add(StringTokenizer input) {
-		if (input.countTokens() < 2) {
+		if (! input.hasMoreTokens()) {
 			out.println("Entrada invalida.");
 			return;
 		}
 
 		int key = read_int(input.nextToken());
-		String obj = input.nextToken();
+		String obj = input.hasMoreTokens() ? input.nextToken() : "nome";
 
 		if (key < 0) {
 			out.println("Entrada invalida.");
