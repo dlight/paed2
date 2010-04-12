@@ -6,7 +6,7 @@ run : all
 	rlwrap java Main
 
 %.class : %.java
-	javac $< # -o $@
+	javac -source 1.6 $< # -o $@
 
 #Main.class : Aluno.java BinarySearchTree.java BinarySearchTreeNode.java Main.java
 #	javac $^
