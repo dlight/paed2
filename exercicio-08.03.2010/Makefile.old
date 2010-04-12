@@ -1,0 +1,8 @@
+run : Main.class
+	java Main
+
+Main.class : Aluno.java BinarySearchTree.java BinarySearchTreeNode.java Main.java
+	javac $^
+
+clean :
+	rm *.class
