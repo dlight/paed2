@@ -16,14 +16,16 @@ public class Main {
 	static String input_str;
 	static StringTokenizer input;
 
-	public static void print() {
-		b.print();
-	}
+	public static void main(String args[]) {
+		init();
 
-	public static void check_empty() {
-		out.println(b.isEmpty() ?
-			"A arvore esta vazia." :
-			"A arvore nao esta vazia.");
+		try {
+			while (true)
+				read();
+		}
+		catch (IOException e) {
+			return;
+		}
 	}
 
 	public static void init() {
@@ -42,68 +44,7 @@ public class Main {
 
 		out.println("Digite help.\n");
 
-
-		/*insert(3, "Risos");
-		insert(2, "Faggot");
-		insert(1, "Phenom");
-		insert(4, "Nice");
-		insert(5, "Mermaid");
-		insert(6, "Rufus");
-		insert(7, "Labour");
-		insert(16, "Corea");
-		insert(15, "Mermaid");
-		insert(14, "Mermaid");*/
-
 		check_empty();
-	}
-
-	public static void show_help() {
-		out.print("Os comandos disponiveis sao:\n\n" +
-			"add chave obj\t\tAdiciona algo a arvore.\n" +
-			"empty\t\t\tCheca se a arvore esta vazia.\n" +
-			"exit\t\t\tSai do interpretador.\n" +
-			"help\t\t\tEste comando :P\n" +
-			"print\t\t\tImprime a arvore.\n");
-	}
-
-	public static void exit() throws IOException {
-		throw new IOException();
-	}
-
-	//public static void insert(StringTokenizer input) {
-	//	
-	//}
-
-	public static void insert(int mat, String nome) {
-		Integer m = new Integer(mat);
-		b.insert(mat, new Aluno(mat, nome));
-	}
-
-	public static int read_int(String s) {
-        try {
-			return Integer.parseInt(s);
-        }
-		catch (NumberFormatException e) {
-			return -1;
-		}
-	}
-
-	public static void add(StringTokenizer input) {
-		if (! input.hasMoreTokens()) {
-			out.println("Entrada invalida.");
-			return;
-		}
-
-		int key = read_int(input.nextToken());
-		String obj = input.hasMoreTokens() ? input.nextToken() : "nome";
-
-		if (key < 0) {
-			out.println("Entrada invalida.");
-			return;
-		}
-
-		insert(key, obj);
-		print();
 	}
 
 	public static void read() throws IOException {
@@ -124,29 +65,104 @@ public class Main {
 
 		String cmd = input.nextToken();
 
-		if (cmd.equals("help"))
-			show_help();
-		else if (cmd.equals("exit"))
-			exit();
+		if (cmd.equals("add") || cmd.equals("a"))
+			add(input);
+		else if (cmd.equals("clear"))
+			clear();
 		else if (cmd.equals("empty"))
 			check_empty();
+		else if (cmd.equals("exit"))
+			exit();
+		else if (cmd.equals("help"))
+			show_help();
+		else if (cmd.equals("search"))
+			search(input);
 		else if (cmd.equals("print"))
-			print();
-		else if (cmd.equals("add") || cmd.equals("a"))
-			add(input);
+			b.print();
 		else
 			out.println(cmd + ": comando invalido.");
 	}
 
-	public static void main(String args[]) {
-		init();
+	public static void show_help() {
+		out.print("Os comandos disponiveis sao:\n\n" +
+			"add chave obj\t\tAdiciona algo a arvore.\n" +
+			"clear\t\t\tApaga a arvore.\n" +
+			"empty\t\t\tCheca se a arvore esta vazia.\n" +
+			"exit\t\t\tSai do interpretador.\n" +
+			"help\t\t\tEste comando :P\n" +
+			"search\t\t\tBusca uma chave na arvore.\n" +
+			"print\t\t\tImprime a arvore.\n");
+	}
 
-		try {
-			while (true)
-				read();
-		}
-		catch (IOException e) {
-			return;
+	public static void check_empty() {
+		out.println(b.isEmpty() ?
+			"A arvore esta vazia." :
+			"A arvore nao esta vazia.");
+	}
+
+	public static void clear() {
+		b = new BinarySearchTree<Integer, Aluno>();
+	}
+
+	public static void exit() throws IOException {
+		throw new IOException();
+	}
+
+	//public static void insert(StringTokenizer input) {
+	//	
+	//}
+
+	public static void insert(int mat, String nome) {
+		Integer m = new Integer(mat);
+		b.insert(mat, new Aluno(mat, nome));
+	}
+
+	private static int read_int(String s) {
+        try {
+			return Integer.parseInt(s);
+        }
+		catch (NumberFormatException e) {
+			return -1;
 		}
 	}
+
+	private static void entrada_invalida() {
+			out.println("Entrada invalida.");
+	}
+
+	public static void add(StringTokenizer input) {
+		if (! input.hasMoreTokens()) {
+			entrada_invalida();
+			return;
+		}
+
+		int key = read_int(input.nextToken());
+		String obj = input.hasMoreTokens() ? input.nextToken() : "nome";
+
+		if (key < 0) {
+			entrada_invalida();
+			return;
+		}
+
+		insert(key, obj);
+		b.print();
+	}
+
+	public static void search(StringTokenizer input) {
+		if (! input.hasMoreTokens()) {
+			entrada_invalida();
+			return;
+		}
+
+		int key = read_int(input.nextToken());
+		if (key < 0) {
+			entrada_invalida();
+			return;
+		}
+
+		Aluno a = b.search(key);
+
+		out.println(a == null ? "Nao encontrado." : a);
+	}
+		
 }

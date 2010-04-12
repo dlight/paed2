@@ -3,7 +3,7 @@ OBJS = Main.class Aluno.class BinarySearchTree.class BinarySearchTreeNode.class
 all : $(OBJS)
 
 run : all
-	java Main
+	rlwrap java Main
 
 %.class : %.java
 	javac $< # -o $@

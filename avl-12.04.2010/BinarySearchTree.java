@@ -25,7 +25,7 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	}
 
 	private T searchRecursive(BinarySearchTreeNode<K, T> node, K key) {
-		if (node.isTerminal())
+ 		if (node.isTerminal())
 			return null;
 
 		int c = node.getKey().compareTo(key);
@@ -33,9 +33,9 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 		if (c == 0)
 			return node.getObject();
 		else if (c < 0)
-			return searchRecursive(node.getLeft(), key);
-		else
 			return searchRecursive(node.getRight(), key);
+		else
+			return searchRecursive(node.getLeft(), key);
 	}
 
 	private boolean insertRecursive(BinarySearchTreeNode<K, T> node,
