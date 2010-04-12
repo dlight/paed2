@@ -73,20 +73,11 @@ public class BinarySearchTreeNode<K extends Comparable<K>, T> {
 	public void swap(BinarySearchTreeNode<K, T> q) {
 		BinarySearchTreeNode<K, T> tmp = new BinarySearchTreeNode<K, T>(q);
 
-		/*K tmp_key = q.getKey();
-		T tmp_obj = q.getObject();
-		BinarySearchTreeNode<K, T> tmp_left = q.getLeft();
-		BinarySearchTreeNode<K, T> tmp_right = q.getRight();*/
-
 		q.setKey(this.key);
 		q.setObject(this.object);
-		//q.setLeft(this.left);
-		//q.setRight(this.right);
 
 		this.setKey(tmp.getKey());
 		this.setObject(tmp.getObject());
-		//this.setLeft(tmp.getLeft());
-		//this.setRight(tmp.getRight());
 
 	}
 
