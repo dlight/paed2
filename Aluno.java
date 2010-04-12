@@ -11,21 +11,21 @@ public class Aluno {
 	private String nome;
 
 	public Aluno() {
-		this.rg = 0;
+		this.matricula = 0;
 		this.nome = "aaa";
 	}
 
-	public Aluno(int rg, String nome) {
-		this.rg = rg;
+	public Aluno(int matricula, String nome) {
+		this.matricula = matricula;
 		this.nome = nome;
 	}
 
-	public int getRg() {
-		return rg;
+	public int getmatricula() {
+		return matricula;
 	}
 
-	public void setRg(int rg) {
-		this.rg = rg;
+	public void setmatricula(int matricula) {
+		this.matricula = matricula;
 	}
 
 	public String getNome() {
@@ -37,10 +37,10 @@ public class Aluno {
 	}
 
 	public String toString() {
-	return String.format("%s %s", this.getRg(), this.getNome());
+		return String.format("%s:%s", this.getmatricula(), this.getNome());
 	}
 
 	public void print() {
-	System.out.println(this.toString());
+		System.out.println(this.toString());
 	}
 }

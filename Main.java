@@ -7,11 +7,22 @@
 // Main: ponto de entrada
 
 public class Main {
+	static BinarySearchTree<Integer, Aluno> b;
+
+	public static void add(int mat, String nome) {
+		Integer m = new Integer(mat);
+		b.insert(mat, new Aluno(mat, nome));
+	}
+
+	public static void print() {
+		b.print();
+	}
+
 	public static void main(String args[]) {
+		b = new BinarySearchTree<Integer, Aluno>();
 
-		BinarySearchTree<Integer, Aluno> b =
-			new BinarySearchTree<Integer, Aluno>();
+		add(200619853, "Elias");
 
-		b.insert(10, new Aluno(10, "Teste");
+		print();
 	}
 }
