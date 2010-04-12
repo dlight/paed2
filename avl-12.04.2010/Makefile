@@ -1,4 +1,4 @@
-OBJS = Main.class Aluno.class BinarySearchTree.class BinarySearchTreeNode.class
+OBJS = BinarySearchTreeNode.java BinarySearchTree.java Aluno.class Main.class
 
 all : $(OBJS)
 
