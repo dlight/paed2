@@ -87,14 +87,14 @@ public class Main {
 
 	public static void show_help() {
 		out.println("Os comandos disponiveis sao:\n\n" +
-			"add chave obj\t\tAdiciona algo a arvore.\n" +
-			"clear\t\t\tApaga a arvore.\n" +
-			"empty\t\t\tCheca se a arvore esta vazia.\n" +
-			"exit\t\t\tSai do interpretador.\n" +
-			"help\t\t\tEste comando :P\n" +
-			"rem chave\t\tRemove uma chave da arvore.\n" +
-			"search chave\t\tBusca uma chave na arvore.\n" +
-			"print\t\t\tExibe uma representacao da arvore.\n");
+			"add chave obj\tAdiciona algo a arvore.\n" +
+			"clear\t\tApaga a arvore.\n" +
+			"empty\t\tCheca se a arvore esta vazia.\n" +
+			"exit\t\tSai do interpretador.\n" +
+			"help\t\tEste comando :P\n" +
+			"rem chave\tRemove uma chave da arvore.\n" +
+			"search chave\tBusca uma chave na arvore.\n" +
+			"print\t\tExibe uma representacao da arvore.\n");
 
 		out.println("Uma arvore vazia eh exibida como \".\", e uma arvore " +
 			"nao-vazia como:\n");
@@ -119,6 +119,7 @@ public class Main {
 
 	public static void clear() {
 		b = new BinarySearchTree<Integer, Aluno>();
+		check_empty();
 	}
 
 	public static void exit() throws IOException {

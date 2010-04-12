@@ -67,7 +67,7 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 			BinarySearchTreeNode<K, T> q = findLeftmost(f.getRight());
 			f.swap(q);
 
-			return removeCases(q);
+			removeCases(q);
 
 		}
 	}
